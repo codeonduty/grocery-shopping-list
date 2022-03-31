@@ -15,9 +15,7 @@ const config = {
     env: process.env.NODE_ENV || 'development',
     port: process.env.port || 4000,
     mongoURI: process.env.MONGODB_URI
-        || 'monogdb://' + process.env.MONGO_HOST
-        || 'mongodb://' + (process.env.IP || 'localhost') + ':' +
-           (process.env.MONGO_PORT || '27017') + '/grocery-shopping-list'
+        || 'mongodb://localhost:27017/grocery-shopping-list'
 }
 
 module.exports = config;
