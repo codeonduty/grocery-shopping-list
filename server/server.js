@@ -1,4 +1,4 @@
-// server.js
+// server.js --- Server entry point
 
 // Code:
 
