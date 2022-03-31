@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/codeonduty/grocery-shopping-list/issues"
   },
-  "homepage": "https://github.com/codeonduty/grocery-shopping-list#readme"
+  "homepage": "https://github.com/codeonduty/grocery-shopping-list#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }
