@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "./node_modules/.bin/webpack --config webpack.config.client.js",
     "build:server": "./node_modules/.bin/webpack --config webpack.config.server.js",
-    "production:client": "./node_modules/.bin/webpack --config webpack.config.client.production.js"
+    "production:client": "./node_modules/.bin/webpack --config webpack.config.client.production.js",
+    "start": "node ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "body-parser": "^1.19.2",
     "clean-webpack-plugin": "^4.0.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "mongoose": "^6.2.9",
     "react": "^18.0.0",
