@@ -7,6 +7,7 @@
 // Code:
 
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
@@ -21,20 +22,23 @@ const ShopperSchema = new Schema({
 
     email: {
         type: String,
+        lowercase: true,
         trim: true,
         unique: true,
         match: [/.+\@.+\..+/, 'Please fill a valid email address.'],
         required: [true, "Email is required!"]
     },
 
-    passkey: {
+    password: {
         type: String,
         trim: true,
+        minLength: [8, 'Minimum password length is 8 characters'],
         required: [true, 'Password is required!']
     },
 
-    salt: {
-        type: String
+    created: {
+        type: Date,
+        default: Date.now
     }
 });
 
