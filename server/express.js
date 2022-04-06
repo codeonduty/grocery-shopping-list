@@ -1,23 +1,26 @@
-// express.js -- Express application entry point
+// express.js --- Express application
 
 // Code:
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
-const parseError = require('./utility/error');
-const homeRoutes = require('./route/home');
 const shopperRoutes = require('./route/shopper');
 
+// Instantiate express application
 const app = express();
 
-app.use(express.static('dist'));
+// Pre-routing middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('client/public'));
 
-app.use(homeRoutes);
+// Express routing
 app.use('/api', shopperRoutes);
 
-app.use(parseError);
+// Post-routing middleware
+app.use(cookieParser());
 
 module.exports = app;
 

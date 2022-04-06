@@ -1,4 +1,4 @@
-// product.js --- Product model in database
+// product.js --- Product model in Database
 
 // Code:
 
@@ -29,15 +29,6 @@ const ProductSchema = new Schema({
     productPrice: {
         type: Number,
         required: [true, 'Product price is required!']
-    },
-
-    created: {
-        type: Date,
-        default: Date.now
-    },
-
-    updated: {
-        type: Date,
     }
 });
 

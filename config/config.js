@@ -1,20 +1,12 @@
-// config.js --- Configuration for the project
+// config.js --- Project configuration
 
-// Commentary:
-//
-// Tne project configuration is stored in a JavaScript object accessible from
-// any module. The structure of this configuration object is as follows:
-//
-// env - differentiates between 'development' mode and 'production' mode
-// port - determines listening port on the server
-// mongoURI - determines location of MongoDB database
-//
 // Code:
 
 const config = {
-    env: process.env.NODE_ENV || 'development',
-    port: process.env.port || 4000,
-    mongoURI: process.env.MONGODB_URI
+    ENV: process.env.NODE_ENV || 'development',
+    PORT: process.env.PORT || 4000,
+    MONGODB_URI: process.env.MONGODB_URI
+        //|| 'mongodb+srv://duty:duty@cluster0.5ts0l.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
         || 'mongodb://localhost:27017/grocery-shopping-list'
 }
 
