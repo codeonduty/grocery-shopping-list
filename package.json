@@ -4,11 +4,13 @@
   "description": "A shopping list application",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:client": "npm run test --prefix client",
+    "test:client:coverage": "npm run test --prefix client -- --coverage",
     "start": "node server/server.js",
     "develop:server": "./node_modules/.bin/nodemon server/server.js",
     "develop:client": "npm start --prefix client",
     "develop": "concurrently \"npm run develop:server\" \"npm run develop:client\""
+    "build:client": "npm run build --prefix client"j
   },
   "repository": {
     "type": "git",
@@ -32,9 +34,13 @@
     "mongoose": "^6.2.10"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^27.5.1",
     "concurrently": "^7.1.0",
     "coveralls": "^3.1.1",
     "jest": "^27.5.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "regenerator-runtime": "^0.13.9"
   }
 }
