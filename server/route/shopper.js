@@ -16,7 +16,7 @@ const shopperController = require('./../controller/shopper');
 
 const router = express.Router();
 
-router.route('/shopper/signup').post(shopperController.create);
+router.route('/shopper/signup').post(shopperController.registerUser);
 
 module.exports = router;
 
