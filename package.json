@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "./node_modules/.bin/webpack --config webpack.config.client.js",
     "build:server": "./node_modules/.bin/webpack --config webpack.config.server.js",
-    "production:client": "./node_modules/.bin/webpack --config webpack.config.client.production.js"
+    "production:client": "./node_modules/.bin/webpack --config webpack.config.client.production.js",
+    "start": "node ./server/server.js"
   },
   "repository": {
     "type": "git",
