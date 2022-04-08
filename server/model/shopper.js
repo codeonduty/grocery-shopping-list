@@ -7,7 +7,6 @@
 // Code:
 
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
@@ -29,11 +28,15 @@ const ShopperSchema = new Schema({
         required: [true, "Email is required!"]
     },
 
-    password: {
+    passkey: {
         type: String,
         trim: true,
         minLength: [8, 'Minimum password length is 8 characters'],
         required: [true, 'Password is required!']
+    },
+
+    salt: {
+        String
     },
 
     created: {
@@ -42,7 +45,7 @@ const ShopperSchema = new Schema({
     }
 });
 
-const Shopper = mongoose.model('shopper', ShopperSchema);
+const Shopper = mongoose.model('Shopper', ShopperSchema);
 
 module.exports = Shopper;
 

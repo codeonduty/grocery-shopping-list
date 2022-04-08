@@ -1,46 +1,43 @@
 {
-  "name": "grocery-shopping-list",
+  "name": "shopping-list",
   "version": "1.0.0",
-  "description": "A shopping list application",
-  "main": "server/server.js",
+  "description": "A shopping list for yours truly :)",
+  "main": "server.js",
   "scripts": {
-    "test:client": "npm run test --prefix client",
-    "test:client:coverage": "npm run test --prefix client -- --coverage",
-    "start": "node server/server.js",
-    "develop:server": "./node_modules/.bin/nodemon server/server.js",
-    "develop:client": "npm start --prefix client",
-    "develop": "concurrently \"npm run develop:server\" \"npm run develop:client\""
-    "build:client": "npm run build --prefix client"j
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/codeonduty/grocery-shopping-list.git"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop:client": "",
+    "develop:server": "./node_modules/.bin/nodemon ./server/server.js",
+    "develop": "",
+    "build:client": "./node_modules/.bin/webpack --config webpack.config.client.production.js",
+    "build:server": "./node_modules/.bin/webpack --mode=production --config webpack.config.server.js",
+    "build": "npm run build:client && npm run build:server",
+    "start": "NODE_ENV=production node ./dist/server.bundle.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/codeonduty/grocery-shopping-list/issues"
-  },
-  "homepage": "https://github.com/codeonduty/grocery-shopping-list#readme",
-  "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/material": "^5.6.0",
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.20.0",
-    "cookie-parser": "^1.4.6",
-    "express": "^4.17.3",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.10"
-  },
   "devDependencies": {
     "@babel/core": "^7.17.9",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^27.5.1",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
     "concurrently": "^7.1.0",
-    "coveralls": "^3.1.1",
-    "jest": "^27.5.1",
+    "file-loader": "^6.2.0",
     "nodemon": "^2.0.15",
-    "regenerator-runtime": "^0.13.9"
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-middleware": "^5.3.1",
+    "webpack-hot-middleware": "^2.25.1",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "@mui/material": "^5.6.0",
+    "babel-loader": "^8.2.4",
+    "express": "^4.17.3",
+    "express-jwt": "^6.1.1",
+    "material-ui-colors": "^1.0.0",
+    "mongoose": "^6.2.10",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0"
   }
 }

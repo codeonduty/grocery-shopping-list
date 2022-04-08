@@ -1,9 +1,9 @@
 // server.js --- Server entry point
 
 // Commentary:
-//
+
 // This module performs two functions, it:
-//
+
 // - initializes the database (establishes the connection and handles error)
 // - initializes the server (establishes the server and handles the error)
 
