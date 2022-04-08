@@ -14,7 +14,6 @@ const express = require('express');
 const path = require('path');
 
 const index = require('./../client/public/index');
-const bundle = require('./bundle');  // Only meant for development, comment out for production
 const shopperRoutes = require('./route/shopper');
 
 const CURRENT_WORKING_DIR = process.cwd();
