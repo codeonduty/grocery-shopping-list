@@ -1,20 +1,21 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.7.0
 jobs:
   test:
-    working_directory: ~/grocery-shopping-list
+    executor:
+      name: node/default
+      tag: '16'
     steps:
       - checkout
       - run: npm install
       - run: npm run test
   build:
-    working_directory: ~/grocery-shopping-list
+    executor: 
+      name: node/default
+      tag: '16'
     steps:
       - checkout
       - run: npm install
       - run: npm run build
-workflows:
-  build_test:
-    jobs:
-      - test
-      - build
