@@ -12,7 +12,7 @@
     "build:server": "./node_modules/.bin/webpack --mode=production --config webpack.config.server.js",
     "build": "npm run build:client && npm run build:server",
     "start": "NODE_ENV=production node ./dist/server.bundle.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
