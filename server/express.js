@@ -1,26 +1,40 @@
 // express.js --- Express application
 
+// Commentary:
+
+// This module defines the following:
+
+// - Pre-routing middleware
+// - API routing
+// - Post-routing middleware
+
 // Code:
 
 const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+const path = require('path');
 
+const index = require('./../client/public/index');
+const bundle = require('./bundle');  // Only meant for development, comment out for production
 const shopperRoutes = require('./route/shopper');
+
+const CURRENT_WORKING_DIR = process.cwd();
 
 // Instantiate express application
 const app = express();
 
 // Pre-routing middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('client/public'));
+app.use(express.json());
+app.use(express.urlencoded());
 
-// Express routing
+app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
+
+// API routing
+app.get('/', (request, response) => {
+    response.status(200).send(index());
+});
+
 app.use('/api', shopperRoutes);
 
-// Post-routing middleware
-app.use(cookieParser());
 
 module.exports = app;
 

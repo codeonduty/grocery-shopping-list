@@ -7,18 +7,21 @@
 // The routes available are as follows:
 
 // '/api/shopper/signup' - (allows API to send sign up user data)
+// '/api/shopper/signin' - (allows API to send sign up user data)
+// '/api/shopper/signout' - (allows API to send sign up user data)
 
 // Code:
 
 const express = require('express');
 
 const shopperController = require('./../controller/shopper');
+const { requireAuthorization, isAuthorized } = require('./../utility/authentication');
 
 const router = express.Router();
 
-router.route('/shopper/signup').post(shopperController.registerShopper);
-router.route('/shopper/signin').post(shopperController.loginShopper);
-router.route('/shopper/signout').get(shopperController.logoutShopper);
+router.post('/shopper/signup', shopperController.registerShopper);
+router.post('/shopper/signin', shopperController.loginShopper);
+router.get('/shopper/signout', shopperController.logoutShopper);
 
 module.exports = router;
 
