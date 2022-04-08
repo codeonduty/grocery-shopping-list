@@ -1,5 +1,12 @@
 // server.js --- Server entry point
 
+// Commentary:
+//
+// This module performs two functions, it:
+//
+// - initializes the database (establishes the connection and handles error)
+// - initializes the server (establishes the server and handles the error)
+
 // Code:
 
 const mongoose = require('mongoose');
@@ -7,23 +14,24 @@ const mongoose = require('mongoose');
 const config = require('./../config/config');
 const app = require('./express');
 
-// Connect database
-mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoURI);
+// Initialize database
+mongoose.Promise = global.Promise;      // Uses JavaScript Promise instead
+mongoose.connect(config.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 mongoose.connection.once('open', function() {
-    console.log('Database connection successful...')
+    console.log('Database connection successful...');
 }).on('error', () => {
-    console.log(`Database connection failure on ${config.mongoUri}...`);
-})
+    console.log(`Database connection failure on ${config.MONGODB_URI}...`);
+});
 
-// Start server
-app.listen(config.port, (error) => {
-    if (error) {
-        console.log(error);
-    }
+// Initialize server
+app.listen(config.PORT, (error) => {
+    if (error) console.log(error);
 
-    console.info('Server started on port %s...', config.port);
-})
+    console.info('Server initiated on port %s...', config.PORT);
+});
 
 // server.js ends here

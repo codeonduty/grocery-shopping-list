@@ -1,4 +1,12 @@
-// shopper.js --- CRUD routes for shopper table in database
+// shopper.js --- Route handler for Shopper model operations
+
+// Commentary:
+
+// This module defines URL routes that can be accessed by an API.
+
+// The routes available are as follows:
+
+// '/api/shopper/signup' - (allows API to send sign up user data)
 
 // Code:
 
@@ -8,11 +16,9 @@ const shopperController = require('./../controller/shopper');
 
 const router = express.Router();
 
-router.route('/shopper')
-      .delete(shopperController.remove);
-
-router.route('/shopper/signup')
-      .post(shopperController.create);
+router.route('/shopper/signup').post(shopperController.registerShopper);
+router.route('/shopper/signin').post(shopperController.loginShopper);
+router.route('/shopper/signout').get(shopperController.logoutShopper);
 
 module.exports = router;
 
