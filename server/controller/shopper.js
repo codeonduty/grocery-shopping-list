@@ -1,73 +1,58 @@
-// shopper.js --- Functions on shopper model in database
+// shopper.js --- Controller functions for shopper model
 
 // Code:
 
-const jwt = require('jsonwebtoken');
+// Libraries
+const asyncHandler = require('express-async-handler');
 
+// Modules
 const Shopper = require('./../model/shopper');
+const { createToken } = require('./../utility/authentication');
 
-const maximumTokenAge = 1 * 24 * 60 * 60;  // Maximum token age in seconds
+// Authenticate shopper
+const authenticateShopper = asyncHandler(async (request, response) => {
+  const username = request.body.username;
+  const password = request.body.password;
 
-// Function creates token
-const createToken = (shopperUsername) => {
-    return jwt.sign({ shopperUsername }, 'shoppingListSecret', {
-        expiresIn: maximumTokenAge
+  // Fetch shopper from database
+  const shopper = await Shopper.findOne({ username });
+
+  // Compare passwords
+  if (shopper && (await shopper.isCorrectPassword(password))) {
+    // Return JSON if passwords
+    response.json({
+      username: shopper.username,
+      token: createToken(shopper.username),
     });
-}
+  } else {
+    // Return error if passwords don't match
+    response
+      .status(401)
+      .json({ error: 'Shopper username or password is Incorrect!' });
+  }
+});
 
-// Function adds shopper to database
+// Add shopper to database
 const registerShopper = (request, response, next) => {
-    Shopper.create(request.body)
-           .then(function(shopper) {
+  const username = request.body.username;
+  const email = request.body.email;
+  const password = request.body.password;
 
-               // Setup JSON web token for session handling
-               const token = createToken(request.body.username);
-               response.cookie('jwt', token, {
-                   httpOnly: true,
-                   maxAge: maximumTokenAge * 1000 // Cookie is in milliseconds
-               });
+  // Save shopper to database
+  Shopper.create(request.body)
+    .then(function (shopper) {
+      // Return JSON if save is successful
+      response.status(201).json({
+        username: shopper.username,
+        token: createToken(shopper.username),
+      });
+    })
+    .catch((error) => {
+      // Return JSON if save is unsuccessful
+      response.status(400).json('Error! Shopper registration failed!' + error);
+    });
+};
 
-               response.status(200).send(shopper);
-           }).catch((error) => {
-               response.send('Error! Shopper registration failed!' + error);
-               console.log(error);
-           });
-}
-
-// Function logs shopper in to application
-const loginShopper = async (request, response, next) => {
-    const { username, password } = request.body;
-
-    try {
-
-        // Retrieve shopper data
-        const shopper = await Shopper.findOne({ username });
-
-        // Authenticate shopper
-        if (shopper) {
-            if (shopper.password = password) {
-
-               // Setup JSON web token for session handling
-                const token = createToken(request.body.username);
-                response.cookie('jwt', token, {
-                    httpOnly: true,
-                    maxAge: maximumTokenAge * 1000 // Cookie is in milliseconds
-                });
-                response.status(200).send({ username: shopper.username });
-            } else {
-                throw Error('Username or password is incorrect!');
-            }
-        }
-    } catch (error) {
-       response.status(400).send(error);
-    }
-}
-
-// Function logs shopper out of application
-const logoutShopper = (request, response, next) => {
-
-}
-
-module.exports = { registerShopper, loginShopper, logoutShopper }
+module.exports = { registerShopper, authenticateShopper };
 
 // shopper.js ends here

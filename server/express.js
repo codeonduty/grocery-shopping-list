@@ -2,25 +2,37 @@
 
 // Code:
 
+// Libraries
 const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+const path = require('path');
 
+// Modules
+const itemRoutes = require('./route/item');
 const shopperRoutes = require('./route/shopper');
 
 // Instantiate express application
 const app = express();
 
 // Pre-routing middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('client/public'));
+app.use(express.json());
 
-// Express routing
+// Route handling
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  app.get('*', (request, response) => {
+    response.sendFile(
+      path.resolve(__dirname, '../client', 'build', 'index.html')
+    );
+  });
+} else {
+  app.get('/', (request, response) => {
+    response.send('API is active....');
+  });
+}
+
+app.use('/api', itemRoutes);
 app.use('/api', shopperRoutes);
-
-// Post-routing middleware
-app.use(cookieParser());
 
 module.exports = app;
 
