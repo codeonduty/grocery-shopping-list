@@ -5,6 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "test": "jest --watchAll",
+    "test:coverage": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "start": "node ./server/server.js",
     "develop:server": "./node_modules/.bin/nodemon ./server/server.js",
     "develop:client": "npm start --prefix client",
