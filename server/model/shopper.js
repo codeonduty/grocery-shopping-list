@@ -1,33 +1,33 @@
-// shopper.js - Shopper model in the database
-
-// Commentary:
-
-// This module defines the Shopper schema used in the database.
+// shopper.js --- Shopper model in database
 
 // Code:
 
+// Libraries
 const mongoose = require('mongoose');
+<<<<<<< HEAD
+=======
+const bcrypt = require('bcryptjs');
+>>>>>>> develop
 
-const Schema = mongoose.Schema;
-
-// Shopper schema definition
-const ShopperSchema = new Schema({
+const ShopperSchema = mongoose.Schema(
+  {
     username: {
-        type: String,
-        trim: true,
-        unique: true,
-        required: [true, 'Username is required!']
+      type: String,
+      trim: true,
+      unique: true,
+      required: [true, 'Username is required!'],
     },
 
     email: {
-        type: String,
-        lowercase: true,
-        trim: true,
-        unique: true,
-        match: [/.+\@.+\..+/, 'Please fill a valid email address.'],
-        required: [true, "Email is required!"]
+      type: String,
+      lowercase: true,
+      trim: true,
+      unique: true,
+      match: [/.+\@.+\..+/, 'Please fill a valid email address.'],
+      required: [true, 'Email is required!'],
     },
 
+<<<<<<< HEAD
     passkey: {
         type: String,
         trim: true,
@@ -45,6 +45,37 @@ const ShopperSchema = new Schema({
     }
 });
 
+=======
+    password: {
+      type: String,
+      trim: true,
+      minLength: [8, 'Minimum password length is 8 characters'],
+      required: [true, 'Password is required!'],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+ShopperSchema.methods = {
+  // Validate password
+  isCorrectPassword: async function (supposedPassword) {
+    return await bcrypt.compare(supposedPassword, this.password);
+  },
+};
+
+// Hook to encrypt password before storing in database
+ShopperSchema.pre('save', async function (next) {
+  const salt = await bcrypt.genSalt(10);
+
+  if (!this.isModified('password')) next();
+
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+// Create Shopper model to use in database
+>>>>>>> develop
 const Shopper = mongoose.model('Shopper', ShopperSchema);
 
 module.exports = Shopper;
