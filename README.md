@@ -7,7 +7,7 @@
   A history log of previously added items will be kept in place. The user in that way is able to check on what items they have added and actually bought from the site.
   What is more amazing is that users are able to share their wish lists with any other user who has access to this site. The user on the receiving end is able to make adjustments to this wish list that will only be reflected on their end, thus sharing a list means giving the receiver of control over items on it.
   
-  We decided to go with react-redux for the front end development of this project. Using MangoDB for the backend. 
+  We decided to go with react-redux for the front end development of this project. Using MongoDB for the backend. 
   Reasons for choosing to go with react-redux is because redux is considered to be react's official redux UI bindings. So the redux team is responsible for maintainance of the react framework directly.
   Being React’s official Redux binding, React-Redux is updated with any modifications in API from both libraries to make sure that the React components behave expectedly.
   Me and my team face some challenges connecting the front and the back-end. This was mainly because of difference in operating systems and the hardships of understanding how to connect the two ends.
